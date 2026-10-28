@@ -1,0 +1,5 @@
+raw_dir: data/raw
+samples_dir: data/samples
+datasets:
+  - configs/datasets/dreaddit.yaml
+  - configs/datasets/tweet_eval_stance.yaml

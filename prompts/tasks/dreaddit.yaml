@@ -1,0 +1,10 @@
+dataset: dreaddit
+description: >-
+  Read a short excerpt from a Reddit post and decide whether the person who wrote it is
+  expressing stress.
+labels:
+  - name: stress
+    definition: The writer expresses that they are currently under stress (mental or emotional strain or tension).
+  - name: not_stress
+    definition: The writer does not express being under stress.
+fewshot_by_subgroup: false

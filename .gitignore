@@ -1,0 +1,57 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Data: raw datasets are never committed; fixed sample IDs are.
+data/*
+!data/DATASETS.md
+!data/samples/
+data/samples/*
+!data/samples/.gitkeep
+!data/samples/*.jsonl
+
+# LLM response cache and run artifacts
+.cache/
+cache/
+*.sqlite
+*.sqlite3
+*.db
+runs/
+
+# Model weights / checkpoints
+models/
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+*.gguf
+
+# LaTeX build products
+report/*.aux
+report/*.log
+report/*.out
+report/*.bbl
+report/*.blg
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

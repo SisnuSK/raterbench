@@ -1,0 +1,8 @@
+name: dreaddit
+seed: 13
+# The published test split has only 715 items, so the whole test split is the eval set.
+eval_size: 715
+calibration:
+  # Held out from train, grouped by post so no post is split across roles.
+  source: train_holdout
+  size: 300

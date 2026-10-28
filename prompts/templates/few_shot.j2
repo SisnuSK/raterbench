@@ -1,0 +1,16 @@
+{% import "_macros.j2" as m -%}
+{{ description }}
+
+Labels:
+{{ m.label_list(labels) }}
+
+Here are labeled examples:
+{% for ex in examples %}
+Example {{ loop.index }}:
+{{ m.text_block(ex.text) }}
+Label: "{{ ex.label }}"
+{% endfor %}
+Now label this text:
+{{ m.text_block(text) }}
+
+{{ m.output_format(labels) }}

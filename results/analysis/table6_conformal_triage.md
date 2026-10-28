@@ -1,0 +1,62 @@
+# Split conformal triage (calibration role -> eval role)
+
+Items whose prediction set has exactly one label are auto-labeled; all others go to a human. coverage_ok: empirical coverage >= coverage_lower_2sd, the mean minus 2 SD of split-conformal coverage given n_cal (Beta) and n_eval (binomial). The guarantee is a lower bound on expected coverage; coarse confidence values can make sets over-cover. It covers the prediction set, not the error rate on auto-labeled items. Dreaddit's calibration set is held out from train, not test (see data/DATASETS.md), so exchangeability is approximate there.
+
+| dataset | model | condition | signal | method | target_coverage | n_cal | n_eval | threshold | empirical_coverage | coverage_lower_2sd | coverage_ok | mean_set_size | pct_routed_to_human | auto_label_error_rate | human_effort_saved_pct | error_rate_if_all_auto |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| dreaddit | llama3.1-8b | codebook | verbalized | LAC | 0.900 | 305 | 715 | 0.900 | 0.968 | 0.861 | True | 1.603 | 60.280 | 0.081 | 39.720 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | verbalized | LAC | 0.950 | 305 | 715 | 0.900 | 0.968 | 0.922 | True | 1.603 | 60.280 | 0.081 | 39.720 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | verbalized | APS | 0.900 | 305 | 715 | 0.961 | 0.927 | 0.861 | True | 1.495 | 50.070 | 0.140 | 49.930 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | verbalized | APS | 0.950 | 305 | 715 | 0.982 | 0.965 | 0.922 | True | 1.731 | 73.427 | 0.126 | 26.573 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | logprob | LAC | 0.900 | 305 | 715 | 0.992 | 0.890 | 0.861 | True | 1.327 | 32.727 | 0.164 | 67.273 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | logprob | LAC | 0.950 | 305 | 715 | 0.998 | 0.924 | 0.922 | True | 1.434 | 43.357 | 0.133 | 56.643 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | logprob | APS | 0.900 | 305 | 715 | 0.997 | 0.898 | 0.861 | True | 1.350 | 35.245 | 0.156 | 64.755 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | logprob | APS | 0.950 | 305 | 715 | 1.000 | 0.947 | 0.922 | True | 1.513 | 51.329 | 0.109 | 48.671 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | self_consistency | LAC | 0.900 | 305 | 715 | 1.000 | 1.000 | 0.861 | True | 2.000 | 100.000 | n/a | 0.000 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | self_consistency | LAC | 0.950 | 305 | 715 | 1.000 | 1.000 | 0.922 | True | 2.000 | 100.000 | n/a | 0.000 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | self_consistency | APS | 0.900 | 305 | 715 | 1.000 | 1.000 | 0.861 | True | 2.000 | 100.000 | n/a | 0.000 | 0.266 |
+| dreaddit | llama3.1-8b | codebook | self_consistency | APS | 0.950 | 305 | 715 | 1.000 | 1.000 | 0.922 | True | 2.000 | 100.000 | n/a | 0.000 | 0.266 |
+| dreaddit | qwen2.5-7b | codebook | verbalized | LAC | 0.900 | 305 | 715 | 0.850 | 1.000 | 0.861 | True | 1.917 | 91.748 | 0.000 | 8.252 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | verbalized | LAC | 0.950 | 305 | 715 | 0.850 | 1.000 | 0.922 | True | 1.917 | 91.748 | 0.000 | 8.252 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | verbalized | APS | 0.900 | 305 | 715 | 0.922 | 0.905 | 0.861 | True | 1.448 | 45.315 | 0.169 | 54.685 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | verbalized | APS | 0.950 | 305 | 715 | 0.945 | 0.937 | 0.922 | True | 1.603 | 60.280 | 0.158 | 39.720 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | logprob | LAC | 0.900 | 305 | 715 | 0.994 | 0.890 | 0.861 | True | 1.152 | 15.245 | 0.130 | 84.755 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | logprob | LAC | 0.950 | 305 | 715 | 1.000 | 0.948 | 0.922 | True | 1.327 | 32.727 | 0.077 | 67.273 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | logprob | APS | 0.900 | 305 | 715 | 0.997 | 0.885 | 0.861 | True | 1.141 | 14.126 | 0.134 | 85.874 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | logprob | APS | 0.950 | 305 | 715 | 1.000 | 0.943 | 0.922 | True | 1.324 | 32.448 | 0.085 | 67.552 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | self_consistency | LAC | 0.900 | 305 | 715 | 1.000 | 1.000 | 0.861 | True | 2.000 | 100.000 | n/a | 0.000 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | self_consistency | LAC | 0.950 | 305 | 715 | 1.000 | 1.000 | 0.922 | True | 2.000 | 100.000 | n/a | 0.000 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | self_consistency | APS | 0.900 | 305 | 715 | 1.000 | 1.000 | 0.861 | True | 2.000 | 100.000 | n/a | 0.000 | 0.182 |
+| dreaddit | qwen2.5-7b | codebook | self_consistency | APS | 0.950 | 305 | 715 | 1.000 | 1.000 | 0.922 | True | 2.000 | 100.000 | n/a | 0.000 | 0.182 |
+| dreaddit | roberta-base-ft | supervised | softmax | LAC | 0.900 | 305 | 715 | 0.923 | 0.887 | 0.861 | True | 1.161 | 16.084 | 0.135 | 83.916 | 0.179 |
+| dreaddit | roberta-base-ft | supervised | softmax | LAC | 0.950 | 305 | 715 | 0.985 | 0.943 | 0.922 | True | 1.371 | 37.063 | 0.091 | 62.937 | 0.179 |
+| dreaddit | roberta-base-ft | supervised | softmax | APS | 0.900 | 305 | 715 | 0.983 | 0.903 | 0.861 | True | 1.227 | 22.937 | 0.123 | 77.063 | 0.179 |
+| dreaddit | roberta-base-ft | supervised | softmax | APS | 0.950 | 305 | 715 | 0.995 | 0.955 | 0.922 | True | 1.448 | 44.755 | 0.081 | 55.245 | 0.179 |
+| tweet_eval_stance | llama3.1-8b | codebook | verbalized | LAC | 0.900 | 249 | 1000 | 0.950 | 0.963 | 0.858 | True | 2.757 | 87.900 | 0.306 | 12.100 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | verbalized | LAC | 0.950 | 249 | 1000 | 1.000 | 1.000 | 0.922 | True | 3.000 | 100.000 | n/a | 0.000 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | verbalized | APS | 0.900 | 249 | 1000 | 0.987 | 0.943 | 0.858 | True | 2.631 | 88.400 | 0.310 | 11.600 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | verbalized | APS | 0.950 | 249 | 1000 | 1.000 | 1.000 | 0.922 | True | 3.000 | 100.000 | n/a | 0.000 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | logprob | LAC | 0.900 | 249 | 1000 | 0.997 | 0.939 | 0.858 | True | 2.130 | 56.500 | 0.140 | 43.500 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | logprob | LAC | 0.950 | 249 | 1000 | 1.000 | 0.979 | 0.922 | True | 2.496 | 74.800 | 0.083 | 25.200 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | logprob | APS | 0.900 | 249 | 1000 | 0.998 | 0.946 | 0.858 | True | 2.144 | 63.900 | 0.116 | 36.100 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | logprob | APS | 0.950 | 249 | 1000 | 1.000 | 0.975 | 0.922 | True | 2.470 | 79.300 | 0.082 | 20.700 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | self_consistency | LAC | 0.900 | 249 | 1000 | 1.000 | 1.000 | 0.858 | True | 3.000 | 100.000 | n/a | 0.000 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | self_consistency | LAC | 0.950 | 249 | 1000 | 1.000 | 1.000 | 0.922 | True | 3.000 | 100.000 | n/a | 0.000 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | self_consistency | APS | 0.900 | 249 | 1000 | 1.000 | 1.000 | 0.858 | True | 3.000 | 100.000 | n/a | 0.000 | 0.261 |
+| tweet_eval_stance | llama3.1-8b | codebook | self_consistency | APS | 0.950 | 249 | 1000 | 1.000 | 1.000 | 0.922 | True | 3.000 | 100.000 | n/a | 0.000 | 0.261 |
+| tweet_eval_stance | qwen2.5-7b | codebook | verbalized | LAC | 0.900 | 249 | 1000 | 0.925 | 0.988 | 0.858 | True | 2.858 | 92.900 | 0.169 | 7.100 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | verbalized | LAC | 0.950 | 249 | 1000 | 0.925 | 0.988 | 0.922 | True | 2.858 | 92.900 | 0.169 | 7.100 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | verbalized | APS | 0.900 | 249 | 1000 | 0.961 | 0.923 | 0.858 | True | 2.398 | 95.300 | 0.170 | 4.700 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | verbalized | APS | 0.950 | 249 | 1000 | 0.981 | 0.964 | 0.922 | True | 2.712 | 99.400 | 0.000 | 0.600 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | logprob | LAC | 0.900 | 249 | 1000 | 1.000 | 0.943 | 0.858 | True | 2.226 | 61.300 | 0.147 | 38.700 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | logprob | LAC | 0.950 | 249 | 1000 | 1.000 | 0.969 | 0.922 | True | 2.480 | 74.000 | 0.119 | 26.000 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | logprob | APS | 0.900 | 249 | 1000 | 1.000 | 0.941 | 0.858 | True | 2.255 | 68.300 | 0.126 | 31.700 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | logprob | APS | 0.950 | 249 | 1000 | 1.000 | 0.962 | 0.922 | True | 2.501 | 82.800 | 0.110 | 17.200 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | self_consistency | LAC | 0.900 | 249 | 1000 | 1.000 | 1.000 | 0.858 | True | 3.000 | 100.000 | n/a | 0.000 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | self_consistency | LAC | 0.950 | 249 | 1000 | 1.000 | 1.000 | 0.922 | True | 3.000 | 100.000 | n/a | 0.000 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | self_consistency | APS | 0.900 | 249 | 1000 | 1.000 | 1.000 | 0.858 | True | 3.000 | 100.000 | n/a | 0.000 | 0.321 |
+| tweet_eval_stance | qwen2.5-7b | codebook | self_consistency | APS | 0.950 | 249 | 1000 | 1.000 | 1.000 | 0.922 | True | 3.000 | 100.000 | n/a | 0.000 | 0.321 |
+| tweet_eval_stance | roberta-base-ft | supervised | softmax | LAC | 0.900 | 249 | 1000 | 0.967 | 0.927 | 0.858 | True | 1.755 | 59.600 | 0.126 | 40.400 | 0.306 |
+| tweet_eval_stance | roberta-base-ft | supervised | softmax | LAC | 0.950 | 249 | 1000 | 0.983 | 0.959 | 0.922 | True | 1.970 | 70.000 | 0.073 | 30.000 | 0.306 |
+| tweet_eval_stance | roberta-base-ft | supervised | softmax | APS | 0.900 | 249 | 1000 | 0.984 | 0.931 | 0.858 | True | 1.792 | 64.000 | 0.111 | 36.000 | 0.306 |
+| tweet_eval_stance | roberta-base-ft | supervised | softmax | APS | 0.950 | 249 | 1000 | 0.993 | 0.966 | 0.922 | True | 2.071 | 80.300 | 0.051 | 19.700 | 0.306 |

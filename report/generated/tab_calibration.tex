@@ -1,0 +1,15 @@
+\begin{tabular}{llcccc}
+\toprule
+ & & \multicolumn{2}{c}{Dreaddit} & \multicolumn{2}{c}{TweetEval} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Model & Signal & ECE$\downarrow$ & AUROC$\uparrow$ & ECE$\downarrow$ & AUROC$\uparrow$ \\
+\midrule
+Llama 3.1 8B & verbalized & 0.17 & 0.77 & 0.11 & 0.52 \\
+ & token prob. & 0.22 & 0.75 & 0.17 & 0.69 \\
+ & self-consistency & 0.24 & 0.56 & 0.22 & 0.58 \\
+Qwen 2.5 7B & verbalized & 0.05 & 0.55 & 0.18 & 0.53 \\
+ & token prob. & 0.16 & 0.80 & 0.29 & 0.71 \\
+ & self-consistency & 0.17 & 0.56 & 0.30 & 0.54 \\
+RoBERTa-base & softmax & 0.14 & 0.76 & 0.17 & 0.72 \\
+\bottomrule
+\end{tabular}

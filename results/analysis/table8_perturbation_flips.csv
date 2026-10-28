@@ -1,0 +1,21 @@
+dataset,model,condition,perturbation,n,flip_rate,acc_original,acc_perturbed,invalid_perturbed
+dreaddit,llama3.1-8b,codebook,gender_swap,120,"0.017 [0.000, 0.042]",0.6916666666666667,0.6916666666666667,0
+dreaddit,llama3.1-8b,codebook,paraphrase,203,"0.084 [0.049, 0.123]",0.7389162561576355,0.7733990147783252,0
+dreaddit,llama3.1-8b,codebook,typo,206,"0.053 [0.024, 0.083]",0.7427184466019418,0.7087378640776699,0
+dreaddit,llama3.1-8b,zero_shot,gender_swap,120,"0.033 [0.008, 0.067]",0.725,0.6916666666666667,0
+dreaddit,llama3.1-8b,zero_shot,paraphrase,203,"0.084 [0.049, 0.128]",0.7733990147783252,0.7980295566502463,0
+dreaddit,llama3.1-8b,zero_shot,typo,206,"0.058 [0.029, 0.092]",0.7766990291262136,0.7378640776699029,0
+dreaddit,qwen2.5-7b,codebook,gender_swap,120,"0.025 [0.000, 0.058]",0.825,0.8333333333333334,0
+dreaddit,qwen2.5-7b,codebook,paraphrase,203,"0.069 [0.039, 0.103]",0.8177339901477833,0.8078817733990148,0
+dreaddit,qwen2.5-7b,codebook,typo,206,"0.029 [0.010, 0.053]",0.8203883495145631,0.8203883495145631,0
+dreaddit,qwen2.5-7b,zero_shot,gender_swap,120,"0.033 [0.008, 0.067]",0.7333333333333333,0.75,0
+dreaddit,qwen2.5-7b,zero_shot,paraphrase,203,"0.079 [0.044, 0.118]",0.7487684729064039,0.7684729064039408,0
+dreaddit,qwen2.5-7b,zero_shot,typo,206,"0.039 [0.015, 0.068]",0.7524271844660194,0.7427184466019418,0
+tweet_eval_stance,llama3.1-8b,codebook,paraphrase,200,"0.085 [0.050, 0.125]",0.755,0.745,0
+tweet_eval_stance,llama3.1-8b,codebook,typo,200,"0.065 [0.035, 0.100]",0.755,0.755,0
+tweet_eval_stance,llama3.1-8b,zero_shot,paraphrase,200,"0.080 [0.045, 0.115]",0.595,0.58,0
+tweet_eval_stance,llama3.1-8b,zero_shot,typo,200,"0.080 [0.045, 0.120]",0.595,0.59,0
+tweet_eval_stance,qwen2.5-7b,codebook,paraphrase,200,"0.075 [0.040, 0.115]",0.715,0.7,0
+tweet_eval_stance,qwen2.5-7b,codebook,typo,200,"0.055 [0.025, 0.090]",0.715,0.715,0
+tweet_eval_stance,qwen2.5-7b,zero_shot,paraphrase,200,"0.090 [0.055, 0.130]",0.61,0.58,0
+tweet_eval_stance,qwen2.5-7b,zero_shot,typo,200,"0.050 [0.025, 0.085]",0.61,0.625,0

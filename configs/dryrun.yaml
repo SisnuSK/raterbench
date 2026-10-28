@@ -1,0 +1,17 @@
+# Quick smoke test: 20 items per dataset, every model and prompting condition.
+name: dryrun
+main: configs/main.yaml
+models:
+  # API models from configs/models/ can be listed here too.
+  - configs/models/llama3.1-8b.yaml
+  - configs/models/qwen2.5-7b.yaml
+conditions: [zero_shot, few_shot, codebook, codebook_reasoning]
+roles: [eval]
+max_items_per_role: 20
+fewshot_k: 5
+seed: 13
+self_consistency:
+  n: 5
+  temperature: 0.7
+  conditions: [codebook]
+budget_usd: 5.0

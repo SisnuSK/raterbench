@@ -1,0 +1,17 @@
+# Full evaluation: every eval and calibration item, both open models, all prompting conditions.
+name: full_local
+main: configs/main.yaml
+models:
+  - configs/models/llama3.1-8b.yaml
+  - configs/models/qwen2.5-7b.yaml
+conditions: [zero_shot, few_shot, codebook, codebook_reasoning]
+# eval: scored items; calibration: held-out set for split conformal prediction.
+roles: [eval, calibration]
+max_items_per_role: null  # all items
+fewshot_k: 5
+seed: 13
+self_consistency:
+  n: 5
+  temperature: 0.7
+  conditions: [codebook]
+budget_usd: 0.0  # local models only: any paid call would be refused

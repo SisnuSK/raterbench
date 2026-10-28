@@ -1,0 +1,14 @@
+run_config: configs/full_local.yaml
+items_per_dataset: 200
+seed: 13
+conditions: [zero_shot, codebook]
+types:
+  # Gender swap only for Dreaddit: for stance targets such as Feminist Movement or
+  # Hillary Clinton, swapping gender can change the meaning of the tweet.
+  dreaddit: [gender_swap, typo, paraphrase]
+  tweet_eval_stance: [typo, paraphrase]
+typo_rate: 0.1
+paraphrase_model: configs/models/qwen2.5-7b.yaml
+text_dir: data/perturbations
+output_dir: results/perturbation
+spot_check_per_type: 15

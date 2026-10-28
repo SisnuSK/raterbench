@@ -1,0 +1,15 @@
+\begin{tabular}{llcccccc}
+\toprule
+ & & \multicolumn{3}{c}{Dreaddit} & \multicolumn{3}{c}{TweetEval} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Model & Signal & Cov. & Human\% & Err.\% & Cov. & Human\% & Err.\% \\
+\midrule
+Llama 3.1 8B & token prob. & 0.890 & 33 & 16.4 & 0.939 & 56 & 14.0 \\
+ & verbalized & 0.968 & 60 & 8.1 & 0.963 & 88 & 30.6 \\
+ & self-consistency & 1.000 & 100 & -- & 1.000 & 100 & -- \\
+Qwen 2.5 7B & token prob. & 0.890 & 15 & 13.0 & 0.943 & 61 & 14.7 \\
+ & verbalized & 1.000 & 92 & 0.0 & 0.988 & 93 & 16.9 \\
+ & self-consistency & 1.000 & 100 & -- & 1.000 & 100 & -- \\
+RoBERTa-base & softmax & 0.887 & 16 & 13.5 & 0.927 & 60 & 12.6 \\
+\bottomrule
+\end{tabular}

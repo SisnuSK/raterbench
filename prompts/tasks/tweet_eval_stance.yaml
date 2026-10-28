@@ -1,0 +1,18 @@
+dataset: tweet_eval_stance
+# `target` is filled from the item's subgroup via `targets` below (SemEval-2016 Task 6 target names).
+description: >-
+  Read a tweet and decide the stance its author takes toward the target "{{ target }}".
+labels:
+  - name: favor
+    definition: The author supports or is in favor of the target, stated or clearly implied.
+  - name: against
+    definition: The author opposes or is against the target, stated or clearly implied.
+  - name: none
+    definition: Neither stance can be inferred from the tweet.
+targets:
+  abortion: Legalization of Abortion
+  atheism: Atheism
+  climate: Climate Change is a Real Concern
+  feminist: Feminist Movement
+  hillary: Hillary Clinton
+fewshot_by_subgroup: true

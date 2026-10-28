@@ -1,0 +1,39 @@
+{
+  "started_utc": "2026-10-27T17:43:47.416745+00:00",
+  "finished_utc": "2026-10-27T17:51:02.998774+00:00",
+  "config": {
+    "main": "configs\\main.yaml",
+    "output_dir": "results\\baselines",
+    "run_encoder": true,
+    "seeds": [
+      13,
+      14,
+      15
+    ],
+    "dev_seed": 13,
+    "dev_fraction": 0.1,
+    "encoder": {
+      "model_name": "FacebookAI/roberta-base",
+      "lr": 2e-05,
+      "batch_size": 16,
+      "max_epochs": 6,
+      "patience": 2,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "bf16": true
+    },
+    "max_length": {
+      "dreaddit": 256,
+      "tweet_eval_stance": 128
+    }
+  },
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "versions": {
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "transformers": "5.21.0",
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+    "scikit_learn": "1.9.1"
+  }
+}

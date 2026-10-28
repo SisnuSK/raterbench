@@ -1,0 +1,7 @@
+name: tweet_eval_stance
+seed: 13
+# Stratified by stance target x label from the 1,249 pooled test items.
+eval_size: 1000
+calibration:
+  # The 249 test items not drawn for eval.
+  source: test_remainder

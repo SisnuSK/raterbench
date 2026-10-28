@@ -1,0 +1,11 @@
+{
+  "n_rows": 100,
+  "n_coded": 100,
+  "per_dataset": {
+    "dreaddit": 50,
+    "tweet_eval_stance": 50
+  },
+  "n_ai_drafted": 100,
+  "n_reviewed": 100,
+  "text": "drafted with a language model and reviewed by the author"
+}

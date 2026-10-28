@@ -1,0 +1,12 @@
+{% import "_macros.j2" as m -%}
+{{ description }}
+
+Apply the following annotation codebook.
+
+<codebook>
+{{ codebook }}
+</codebook>
+
+{{ m.text_block(text) }}
+
+{{ m.output_format(labels) }}

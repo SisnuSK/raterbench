@@ -1,0 +1,9 @@
+{% import "_macros.j2" as m -%}
+{{ description }}
+
+Labels:
+{{ m.label_list(labels) }}
+
+{{ m.text_block(text) }}
+
+{{ m.output_format(labels) }}

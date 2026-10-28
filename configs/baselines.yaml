@@ -1,0 +1,18 @@
+main: configs/main.yaml
+output_dir: results/baselines
+run_encoder: true
+seeds: [13, 14, 15]
+dev_seed: 13
+dev_fraction: 0.1  # Dreaddit has no validation split; TweetEval uses its published one
+encoder:
+  model_name: FacebookAI/roberta-base
+  lr: 2.0e-5
+  batch_size: 16
+  max_epochs: 6
+  patience: 2
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  bf16: true
+max_length:
+  dreaddit: 256
+  tweet_eval_stance: 128

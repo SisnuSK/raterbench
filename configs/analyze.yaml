@@ -1,0 +1,11 @@
+run_dir: results/runs/full_local
+baselines_dir: results/baselines
+perturbation_dir: results/perturbation
+output_dir: results/analysis
+error_samples_dir: results/error_samples
+encoder_seed: 13
+n_bootstrap: 1000
+seed: 13
+conformal_alphas: [0.10, 0.05]
+focus_condition: codebook
+error_samples_per_cell: 25

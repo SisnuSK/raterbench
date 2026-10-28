@@ -1,0 +1,20 @@
+{% macro label_list(labels) -%}
+{% for l in labels %}- "{{ l.name }}": {{ l.definition }}{% if not loop.last %}
+{% endif %}{% endfor %}
+{%- endmacro %}
+
+{% macro text_block(text) -%}
+<text>
+{{ text | trim }}
+</text>
+{%- endmacro %}
+
+{% macro output_format(labels, reasoning=false) -%}
+{% set names = labels | map(attribute="name") | map("tojson") | join(", ") -%}
+Respond with exactly this JSON object:
+{% if reasoning -%}
+{"reasoning": "<one to three sentences explaining your decision>", "label": <one of {{ names }}>, "confidence": <integer 0-100, the probability that your label is correct>}
+{%- else -%}
+{"label": <one of {{ names }}>, "confidence": <integer 0-100, the probability that your label is correct>}
+{%- endif %}
+{%- endmacro %}
